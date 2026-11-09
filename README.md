@@ -1,6 +1,4 @@
-# Shell: The Friday Deploy Script
-
-Deploying Clipstr takes 14 manual steps from a wiki page and last Friday someone skipped step 9. Write the script that deploys safely, checks health, and rolls back by itself.
+<p align="center"><img src="assets/banner.svg" alt="Shell: The Friday Deploy Script" width="100%"></p>
 
 | | |
 |-|-|
@@ -17,9 +15,10 @@ Deploying Clipstr takes 14 manual steps from a wiki page and last Friday someone
 5. Commit and push. Open the **Actions** tab of your fork (click *I understand my workflows, go ahead and enable them* the first time). The **Lab check** shows what is still missing.
 6. When the check is green, **submit the URL of your fork** in the course platform.
 
+> [!NOTE]
 > The check only looks at your answers and any files the lab asks you to commit. Your instructor reads your work and may ask you to explain any line.
 
----
+<p align="center"><img src="assets/divider.svg" alt="" width="100%"></p>
 
 ## The situation
 
@@ -27,6 +26,7 @@ Last Friday, 17:40. The on-call engineer deployed Clipstr by following the wiki:
 
 Your lead: *"One command, no thinking. It must never break the live site, it must notice a bad release, and it must put things back by itself."*
 
+> [!IMPORTANT]
 > **Your mission**
 > - Write `deploy.sh`: one command that deploys a version
 > - Make the switch **atomic**, so nobody ever sees a half-copied release
@@ -35,7 +35,7 @@ Your lead: *"One command, no thinking. It must never break the live site, it mus
 
 **Time:** 75-90 min | **Cost:** free | **You need:** Bash, Python 3 and `curl` in your Ubuntu environment
 
----
+<p align="center"><img src="assets/divider.svg" alt="" width="100%"></p>
 
 ## Part 0 - Set the scene
 
@@ -53,7 +53,7 @@ It prepares `~/deploy-lab` with:
 
 Your script goes in this repository as `deploy.sh`.
 
----
+<p align="center"><img src="assets/divider.svg" alt="" width="100%"></p>
 
 ## Part 1 - Recon: understand the pieces by hand
 
@@ -71,9 +71,10 @@ curl http://127.0.0.1:8090/healthz
 2. Now repeat with `v1.2.0` instead: `cp -r incoming/v1.2.0 releases/`, point `current` at it, restart, and call `/healthz` again. What do you get? (`curl -i` shows the status code.) What did you just do to your "production"?
 3. Point `current` back at `v1.0.0`. How many commands did you need to recover, and how fast could you do it at 17:40 on a Friday?
 
+> [!NOTE]
 > **Predict** If a deploy takes five seconds to copy files and someone requests the site in the middle, what do they see when you copy straight into the live directory? What do they see if you build the new release **next to** it and then change one symlink?
 
----
+<p align="center"><img src="assets/divider.svg" alt="" width="100%"></p>
 
 ## Part 2 - Build deploy.sh
 
@@ -101,23 +102,26 @@ Design rules (this is where you think, not paste):
 
 Build it in layers and run it often. A suggested order: arguments and errors, copy, symlink, restart, health check, rollback, pruning, log.
 
+> [!TIP]
 > **Checkpoint** `./deploy.sh v1.0.0` then `./deploy.sh v1.1.0` leaves `current -> releases/v1.1.0`, `curl .../healthz` reports `1.1.0`, and `deploy.log` tells the whole story.
 
----
+<p align="center"><img src="assets/divider.svg" alt="" width="100%"></p>
 
 ## Part 3 - Break it on purpose
 
 1. **The bad release.** Run `./deploy.sh v1.2.0`. Watch the terminal. Your script should detect the failure, say so clearly, restore `v1.1.0`, and exit with 1. Check with `curl` that the site is still up and serving `1.1.0`.
 
+> [!WARNING]
 > **Break it** Temporarily comment out your rollback and run the broken deploy again. Count how many seconds the site was serving errors. That is the downtime your rollback code prevents. Put it back.
 
 2. **The impatient engineer.** Hit `Ctrl-C` in the middle of a deploy (add a `sleep 5` after the copy to have time). What does your `trap` clean up? Is there a half-copied directory left in `releases/`?
 3. **The typo.** `./deploy.sh v9.9.9` and `./deploy.sh` with no argument. Check the exit codes with `echo $?`.
 4. **Deploy the same version twice.** What happens to the running app? Is that the behaviour you want?
 
+> [!NOTE]
 > **Think** What if two engineers run the script at the same moment? Which step could they both be in at once? How would a lock (for example `flock`) fix that?
 
----
+<p align="center"><img src="assets/divider.svg" alt="" width="100%"></p>
 
 ## Part 4 - Prove it
 
@@ -127,7 +131,7 @@ Build it in layers and run it often. A suggested order: arguments and errors, co
 
 It runs your script against all six releases in a private temporary directory (your own `~/deploy-lab` is not touched), including the broken one.
 
----
+<p align="center"><img src="assets/divider.svg" alt="" width="100%"></p>
 
 ## Level up (optional)
 
