@@ -24,7 +24,7 @@
 
 <p align="center"><img src="assets/gifs/situation.gif" width="300" alt=""></p>
 
-Last Friday, 17:40. The on-call engineer deployed Clipstr by following the wiki: 14 steps, copy-paste. Step 9 ("restart the app") got skipped. The site served the old version all weekend while the team thought the fix was live. Nobody could tell what was actually running, and when they redeployed in a hurry they overwrote the only working copy.
+Last Friday, 17:40. The on-call engineer deployed Clippy by following the wiki: 14 steps, copy-paste. Step 9 ("restart the app") got skipped. The site served the old version all weekend while the team thought the fix was live. Nobody could tell what was actually running, and when they redeployed in a hurry they overwrote the only working copy.
 
 Your lead: *"One command, no thinking. It must never break the live site, it must notice a bad release, and it must put things back by itself."*
 

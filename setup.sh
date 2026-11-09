@@ -19,7 +19,7 @@ class H(http.server.BaseHTTPRequestHandler):
             code = 200 if healthy else 500
             body = ('{"status":"%s","version":"%s"}' % ("ok" if healthy else "error", version)).encode()
         else:
-            code = 200; body = b"Clipstr " + version.encode()
+            code = 200; body = b"Clippy " + version.encode()
         self.send_response(code); self.send_header("Content-Length", str(len(body))); self.end_headers(); self.wfile.write(body)
     def log_message(self, *a): pass
 socketserver.TCPServer.allow_reuse_address = True

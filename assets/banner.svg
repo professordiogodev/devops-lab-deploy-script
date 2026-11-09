@@ -5,7 +5,7 @@
 <text x="48" y="64" font-size="14" letter-spacing="3" fill="#4ade80" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-weight="700">DEVOPS BOOTCAMP · LAB</text>
 <text x="48" y="112" font-size="40" font-weight="800" fill="#ffffff" font-family="Segoe UI,Helvetica,Arial,sans-serif">Shell: The Friday Deploy</text>
 <text x="48" y="160" font-size="40" font-weight="800" fill="#ffffff" font-family="Segoe UI,Helvetica,Arial,sans-serif">Script</text>
-<text x="48" y="190" font-size="15" fill="#e2e8f0" opacity=".92" font-family="Segoe UI,Helvetica,Arial,sans-serif">Deploying Clipstr takes 14 manual steps from a wiki page and last</text>
+<text x="48" y="190" font-size="15" fill="#e2e8f0" opacity=".92" font-family="Segoe UI,Helvetica,Arial,sans-serif">Deploying Clippy takes 14 manual steps from a wiki page and last</text>
 <text x="48" y="212" font-size="15" fill="#e2e8f0" opacity=".92" font-family="Segoe UI,Helvetica,Arial,sans-serif">Friday someone skipped step 9. Write the script that deploys safely,</text>
 <text x="48" y="234" font-size="15" fill="#e2e8f0" opacity=".92" font-family="Segoe UI,Helvetica,Arial,sans-serif">checks health, and rolls back by itself.</text>
 <rect x="48" y="266" width="105" height="32" rx="16" fill="#ffffff" fill-opacity=".14" stroke="#4ade80" stroke-opacity=".7"/><text x="62" y="287" font-size="14" fill="#ffffff" font-family="Segoe UI,Helvetica,Arial,sans-serif">75-90 min</text>
