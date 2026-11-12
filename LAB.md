@@ -2,9 +2,19 @@
 
 ## The situation
 
-Last Friday, 17:40. The on-call engineer deployed Clippy by following the wiki: 14 steps, copy-paste. Step 9 ("restart the app") got skipped. The site served the old version all weekend while the team thought the fix was live. Nobody could tell what was actually running, and when they redeployed in a hurry they overwrote the only working copy.
+The wiki page is still open on the on-call engineer's screen, with their notes in the margin:
 
-Your lead: *"One command, no thinking. It must never break the live site, it must notice a bad release, and it must put things back by itself."*
+```text
+Deploy Clippy                                                (wiki, 14 steps)
+ 1. ssh to the server
+ ...
+ 8. copy the new files over the old ones           <- overwrote the only working copy
+ 9. restart the app                                <- SKIPPED, the site served the old version all weekend
+ ...
+14. tell the team it is live                       <- nobody could tell what was running
+```
+
+Last Friday, 17:40, step 9 was skipped. Your lead gives the whole requirement in three lines: *"One command, no thinking. It must never break the live site. It must notice a bad release and put things back by itself."* The wiki page is the runbook for people; you are writing the runbook for a machine.
 
 > **Your mission**
 > - Write `deploy.sh`: one command that deploys a version
